@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE mapper  
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+  
+<mapper namespace="com.lyc.dao.SmbmsUserDao">  
+    <select id="getAllSmbmsUsers" resultType="SmbmsUser" >
+   		select u.*,r.roleName from smbms_user u inner join smbms_role r on u.userRole = r.id
+   </select>
+   <select id="login" resultType="SmbmsUser" parameterType="SmbmsUser">
+   		select * from smbms_user where userCode = #{userCode} and userPassword = #{userPassword}
+   </select>
+   <insert id="addSmbmsUser" parameterType="SmbmsUser">
+   		insert into smbms_user 
+   		values(default,#{userCode},#{userName},#{userPassword},#{gender},#{birthday},
+   		#{phone},#{address},#{userRole},#{createdBy},#{creationDate},#{modifyBy},#{modifyDate})
+   </insert>
+   
+   <update id="updateSmbmsUser" parameterType="SmbmsUser">
+   		update smbms_user 
+   		<trim prefix="set" suffixOverrides="," suffix="where id = #{id}">
+	   		<if test="userCode !=null">userCode = #{userCode},</if>
+	   		<if test="userName !=null">userName = #{userName},</if>
+	   		<if test="userPassword !=null">userPassword = #{userPassword},</if>
+	   		<if test="gender !=null">gender = #{gender},</if>
+	   		<if test="phone !=null">phone = #{phone},</if>
+	   		<if test="address !=null">address = #{address},</if>
+	   		<if test="userRole !=null">userRole = #{userRole},</if>
+	   		<if test="createdBy !=null">createdBy = #{createdBy},</if>
+	   		<if test="creationDate !=null">creationDate = #{creationDate},</if>
+	   		<if test="modifyBy !=null">modifyBy = #{modifyBy},</if>
+	   		<if test="modifyDate !=null">modifyDate = #{modifyDate},</if>	
+   		</trim>
+   </update>
+   <delete id="delSmbmsUser" parameterType="string">
+   		delete from smbms_user where userCode = #{userCode}
+   </delete>
+   <select id="getSmbmsUserById" parameterType="SmbmsUser" resultType="SmbmsUser">
+   		select * from smbms_user where id = #{id}
+   </select>
+   <select id="count" parameterType="SmbmsUser" resultType="int">
+   		SELECT COUNT(*) FROM smbms_user,smbms_role WHERE smbms_user.userRole = smbms_role.id AND roleName = #{roleName}
+   </select>
+   
+  <!--  <resultMap type="SmbmsUser" id="smbmsUser">
+   		<id property="id" column="id"/>
+   		<result property="userCode" column="userCode"/>
+   		<result property="userName" column="userName"/>
+   		<result property="userPassword" column="userPassword"/>
+   		<result property="roleName" column="roleName"/>
+   </resultMap> -->
+</mapper>
