@@ -42,6 +42,8 @@ public class loginController {
 	
 	
 	
+	
+	
 	/*@ExceptionHandler(RuntimeException.class)
 	public String exceptionHandler(RuntimeException exception,HttpServletRequest req){
 		req.setAttribute("exception", exception);

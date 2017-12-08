@@ -12,6 +12,9 @@ public class RoleController {
 
 	//@Autowired
 	private SmbmsRoleService rs;
+	
+	
+	
 	/*@RequestMapping("getrolelist")
 	public String getSmbmsRoles(Map<String,Object> model){
 		model.put("roles", rs.getSmbmsRoles());
